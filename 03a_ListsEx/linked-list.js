@@ -21,13 +21,28 @@ class LinkedList {
   /** push(val): add new value to end of list. */
 
   push(val) {
+    const newNode = new Node(val)
 
+    if(!this.head){
+      this.head = newNode
+      this.tail = newNode
+    } else {
+      this.tail.next = newNode
+      this.tail = newNode
+    }
+    this.length++;
   }
 
   /** unshift(val): add new value to start of list. */
 
   unshift(val) {
-
+    const newNode = new Node(val)
+    newNode.next = this.head
+    this.head = newNode
+    if(this.length === 0){
+      this.tail = newNode
+    }
+    this.length++;
   }
 
   /** pop(): return & remove last item. */
