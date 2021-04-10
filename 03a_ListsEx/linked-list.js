@@ -48,6 +48,7 @@ class LinkedList {
   /** pop(): return & remove last item. */
 
   pop() {
+    let currNode = this.head
     let returnVal;
     while(currNode.next){
       if(currNode.next.next){
@@ -138,13 +139,45 @@ class LinkedList {
   /** removeAt(idx): return & remove item at idx, */
 
   removeAt(idx) {
-
+    let count = 1;
+    let currNode = this.head
+    while(count !== idx && idx !== 0){
+      currNode = currNode.next
+      if(!currNode) throw Error('invalid idx')
+      count++
+    }
+    
+    let returnedNode;
+    this.length--;
+    if(!currNode || !currNode.next){
+      this.head = null
+      this.tail = null
+      returnedNode = this.head
+      return returnedNode
+    } else {
+      returnedNode = currNode.next.val
+      currNode.next = currNode.next.next
+    }
+    return returnedNode
   }
 
   /** average(): return an average of all values in the list */
 
   average() {
+        if(!this.head){
+      return 0
+    }
+    let currNode = this.head
+    let valTotal = 0
     
+    while(currNode.next){
+      valTotal += currNode.val
+      currNode = currNode.next
+      // count++;
+    }
+    valTotal += currNode.val
+    return valTotal/this.length
+  
   }
 }
 
